@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Reddit Feed</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    {# <script src="/client.js" defer></script> #}
+  </head>
+  <body>
+
+{#
+  // r.data.children.forEach(
+  //   d =>
+  //     (page += `
+  // <h3>${d.data.title}</h3>
+  // <p>${d.data.id}</p>
+  // <img src="${d.data.url}" />
+#}
+    <main>
+    <h1>Reddit Feed</h1>
+    <p>By Oscar</p>
+    {% for post in data %}
+      <div class="post">
+        <a href="https://reddit.com{{ post.data.permalink }}"><h3 class="post__title">{{ post.data.title }}</h3></a>
+        <p class="post__id">{{ post.data.id }}</p>
+        {# <img src="{{ post.data.url }}" alt="" class="post__img"> #}
+        <a href="{{ post.data.url }}"><img src="{{ post.data.url }}" alt="" class="post__img" /></a>
+      </div>
+      {% if loop.last %}
+      <a class="next-a" href="/{{ post.data.subreddit_name_prefixed }}/{{ post.data.id }}">Next ></a>
+      {% endif %}
+    {% endfor %}
+    </main>
+  </body>
+</html>
